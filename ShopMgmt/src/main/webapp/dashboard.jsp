@@ -65,6 +65,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="profile.jsp">
+        <%= request.getAttribute("username") != null ? request.getAttribute("username") : "Guest" %>
+    </a> 
+</li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="home.jsp">Home</a>
                     </li>
