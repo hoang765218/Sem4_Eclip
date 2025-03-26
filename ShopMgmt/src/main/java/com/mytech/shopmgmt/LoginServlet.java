@@ -3,6 +3,7 @@ package com.mytech.shopmgmt;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
@@ -65,11 +66,11 @@ public class LoginServlet extends HttpServlet {
 			// neu sai thì chuyển về trang login.jsp
 			
 			 if ("admin".equals(username) && "123456".equals(password)) {
-			        // Đăng nhập thành công -> Chuyển hướng sang dashboard.jsp
-			        response.sendRedirect("dashboard.jsp");
+				 RequestDispatcher requestDispatcher = request.getRequestDispatcher("dashboard.jsp");
+				 	requestDispatcher.forward(request, response);
 			    } else {
-			        // Đăng nhập thất bại -> Quay lại login.jsp với thông báo lỗi
-			        response.sendRedirect("login.jsp?error=true");
+			    	 RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
+			    	 requestDispatcher.forward(request, response);
 			    }
 	}
 	
