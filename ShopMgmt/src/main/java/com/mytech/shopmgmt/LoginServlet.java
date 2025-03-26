@@ -8,6 +8,7 @@ import jakarta.servlet.Servlet;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -66,8 +67,18 @@ public class LoginServlet extends HttpServlet {
 			// neu sai thì chuyển về trang login.jsp
 			
 			 if ("admin".equals(username) && "123456".equals(password)) {
-				 RequestDispatcher requestDispatcher = request.getRequestDispatcher("dashboard.jsp");
-				 	requestDispatcher.forward(request, response);
+//				 RequestDispatcher requestDispatcher = request.getRequestDispatcher("dashboard.jsp");
+//				 	requestDispatcher.forward(request, response);
+				 Cookie ckUsername = new Cookie ("username", username);
+				 Cookie ckLoginDate = new Cookie ("loginDate",System.currentTimeMillis() + "");
+				 
+				 response.addCookie(ckUsername);
+				 response.addCookie(ckLoginDate);
+				 
+				 response.sendRedirect("dashboard");
+				 
+				 
+				 
 			    } else {
 			    	 RequestDispatcher requestDispatcher = request.getRequestDispatcher("error.jsp");
 			    	 requestDispatcher.forward(request, response);
