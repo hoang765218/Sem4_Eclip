@@ -1,123 +1,127 @@
-
-<!-- Phần còn lại của dashboard.jsp giữ nguyên -->
-
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+         pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard - Quản lý hệ thống</title>
+    <meta charset="UTF-8" />
+    <title>Home Page</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome cho icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
     <style>
-        .sidebar {
-            min-height: 100vh;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
+        .navbar-brand {
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .navbar {
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .hero {
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            padding: 60px 20px;
+            color: #fff;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+        }
+        .content-section {
+            padding: 40px 20px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Dashboard</a>
-            <div class="d-flex">
-                <span class="navbar-text me-3">Xin chào, <%= session.getAttribute("username") != null ? session.getAttribute("username") : "Khách" %></span>
-               
-                <!-- Thay dòng này trong navbar -->
-<a href="${pageContext.request.contextPath}/logout.jsp" class="btn btn-outline-danger">Đăng xuất</a>
+    <!-- Thanh điều hướng (Navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">My Shop</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.jsp">Home</a>
+                    </li>
+                    <!-- Thêm các menu khác nếu cần -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sales</a>
+                    </li>
+                    <!-- Nút logout ví dụ, tùy thuộc cấu trúc app -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.jsp">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <!-- Phần nội dung chính -->
+    <div class="hero">
+        <h1>Welcome to the Home Page</h1>
+        <p>Your login was successful. Explore your dashboard below.</p>
+    </div>
+
+    <div class="content-section container">
+        <h2>Overview</h2>
+        <p>
+            This is where you can put a brief overview of the application, recent updates,
+            or shortcuts to various functionalities such as product management, sales
+            tracking, and more.
+        </p>
+
+        <hr />
+
+        <h3>Quick Actions</h3>
         <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">
-                                <i class="fas fa-home me-2"></i>Trang chủ
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-users me-2"></i>Quản lý người dùng
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-chart-bar me-2"></i>Thống kê
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-cog me-2"></i>Cài đặt
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Tổng quan hệ thống</h1>
-                </div>
-
-                <!-- Dashboard cards -->
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="card card-hover">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-users me-2"></i>Tổng người dùng</h5>
-                                <h2 class="card-text">1,234</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card card-hover">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-shopping-cart me-2"></i>Đơn hàng hôm nay</h5>
-                                <h2 class="card-text">56</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card card-hover">
-                            <div class="card-body">
-                                <h5 class="card-title"><i class="fas fa-dollar-sign me-2"></i>Doanh thu</h5>
-                                <h2 class="card-text">12,345,678 VNĐ</h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Additional content -->
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Thông tin hệ thống</h5>
-                        <p>Thời gian hiện tại: <%= new java.util.Date() %></p>
-                        <p>Phiên bản hệ thống: 1.0.0</p>
-                    </div>
-                </div>
-            </main>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-primary w-100">Manage Products</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-warning w-100">View Sales</button>
+            </div>
+            <div class="col-md-4 mb-3">
+                <button class="btn btn-success w-100">Add New Items</button>
+            </div>
         </div>
     </div>
 
+    <!-- Phần footer -->
+    <footer class="footer">
+        <p>&copy; 2025 My Shop. All rights reserved.</p>
+    </footer>
+
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
 </body>
 </html>
