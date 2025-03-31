@@ -1,132 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <title>Home Page</title>
-    <!-- Bootstrap CSS -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-    />
+    <meta charset="UTF-8">
+    <title>Shop Management - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            background-color: #f0f4f8;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #2c6e49;
         }
         .navbar-brand {
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #f4a261 !important;
+            font-weight: 700;
+            font-size: 1.5rem;
         }
-        .hero {
-            background: linear-gradient(135deg, #1f4037, #99f2c8);
-            padding: 60px 20px;
-            color: #fff;
-            text-align: center;
+        .navbar-brand .logo {
+            font-size: 2rem;
+            margin-right: 10px;
         }
-        .hero h1 {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 20px;
+        .btn-logout {
+            background-color: #e76f51;
+            border: none;
+            color: white;
         }
-        .hero p {
-            font-size: 20px;
+        .btn-logout:hover {
+            background-color: #d65a3d;
+            color: white;
         }
-        .content-section {
-            padding: 40px 20px;
+        .dashboard-content {
+            margin-top: 50px;
+            padding: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        .footer {
-            background-color: #343a40;
-            color: #fff;
-            padding: 15px 20px;
-            text-align: center;
+        h2 {
+            color: #2c6e49;
         }
     </style>
 </head>
 <body>
-    <!-- Thanh điều hướng (Navbar) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">My Shop</a>
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="profile.jsp">
-        <%= request.getAttribute("username") != null ? request.getAttribute("username") : "Guest" %>
-    </a> 
-</li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.jsp">Home</a>
-                    </li>
-                    <!-- Thêm các menu khác nếu cần -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sales</a>
-                    </li>
-                    <!-- Nút logout ví dụ, tùy thuộc cấu trúc app -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.jsp">Logout</a>
-                    </li>
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-store logo"></i> Shop Management
+            </a>
+            <div class="ms-auto">
+                <span class="text-white me-3">
+                   Welcome, <a href="profile.jsp" class="nav-link-profile">${username}</a> (Last login: ${loginDate})
+                </span>
+                <form action="logout" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-logout">Logout</button>
+                </form>
             </div>
         </div>
     </nav>
 
-    <!-- Phần nội dung chính -->
-    <div class="hero">
-        <h1>Welcome to the Home Page</h1>
-        <p>Your login was successful. Explore your dashboard below.</p>
-    </div>
-
-    <div class="content-section container">
-        <h2>Overview</h2>
-        <p>
-            This is where you can put a brief overview of the application, recent updates,
-            or shortcuts to various functionalities such as product management, sales
-            tracking, and more.
-        </p>
-
-        <hr />
-
-        <h3>Quick Actions</h3>
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <button class="btn btn-primary w-100">Manage Products</button>
+    <div class="dashboard-content">
+        <h2>Welcome to Shop Management</h2>
+        <p>This is your dashboard, ${username}. You can manage your shop here.</p>
+        <p>Last login: ${loginDate}</p>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Products</h5>
+                        <p class="card-text">Manage your product inventory.</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <button class="btn btn-warning w-100">View Sales</button>
-            </div>
-            <div class="col-md-4 mb-3">
-                <button class="btn btn-success w-100">Add New Items</button>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Orders</h5>
+                        <p class="card-text">View and process customer orders.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Phần footer -->
-    <footer class="footer">
-        <p>&copy; 2025 My Shop. All rights reserved.</p>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

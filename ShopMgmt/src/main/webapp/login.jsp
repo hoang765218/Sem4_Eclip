@@ -70,6 +70,24 @@
     .btn-custom:hover {
       background-color: #e68a00;
     }
+    /* Button Sign Up */
+    .btn-signup {
+      background-color: #28a745;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-weight: bold;
+      font-size: 16px;
+      color: white;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .btn-signup:hover {
+      background-color: #218838;
+      color: white;
+    }
     /* Đặt vị trí cho checkbox */
     .form-check-label {
       margin-left: 5px;
@@ -94,6 +112,8 @@
       </div>
       <button type="submit" class="btn btn-custom w-100">Login</button>
     </form>
+    <!-- Nút Sign Up -->
+    <a href="user?action=create" class="btn btn-signup w-100">Sign Up</a>
   </div>
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
