@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.mytech.shopmgmt.dao.ProductDao;
+import com.mytech.shopmgmt.dao.ProductJDBCDao;
 import com.mytech.shopmgmt.helpers.ServletHelper;
 import com.mytech.shopmgmt.models.Product;
 
@@ -19,6 +21,7 @@ import com.mytech.shopmgmt.models.Product;
 @WebServlet("/products")
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	// private ProductJDBCDao productDao;
 	private ProductDao productDao;
 
 	/**
@@ -34,34 +37,54 @@ public class ProductServlet extends HttpServlet {
 		productDao = new ProductDao();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<Product> listProducts = productDao.getProducts();
-		request.setAttribute("listProducts", listProducts);
-		//Cach 1: JSP Scriplet de hien thi listProducts
-		//Cach 2: Su dung taglib JSTL de hien listProducts
-		
-		for (Product product : listProducts) {
-			System.out.println(product.toString());
-		}
-		
-		
-		ServletHelper.forward(request, response, "products");
 
+		String action = request.getParameter("action");
+		System.out.println("action:" + action);
+
+		if ("add".equals(action)) {
+
+			ServletHelper.forward(request, response, "add_product");
+		} else if ("update".equals(action)) {
+			String code = request.getParameter("code");
+			Product product = productDao.getProductByCode(code);
+			if (product != null) {
+				request.setAttribute("product", product);
+				ServletHelper.forward(request, response, "edit_product");
+			}else {
+				ServletHelper.forward(request, response, "errors");
+			}
+
+		} else {
+			List<Product> listProducts = productDao.getProducts();
+			request.setAttribute("listProducts", listProducts);
+			// Su dung taglib JSTL de hien listProducts
+			for (Product product : listProducts) {
+				System.out.println(product.toString());
+			}
+			ServletHelper.forward(request, response, "products");
+		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action = request.getParameter("action");
+		String code = request.getParameter("code");
+		String name = request.getParameter("name");
+		String priceString = request.getParameter("price");
+		double price = Double.parseDouble(priceString);
+
+		Product product = new Product(code, name, price, "");
+		
+		if("update".equals(action)) {
+			productDao.updateProduct(product);
+		}else {
+			productDao.addProduct(product);
+		}
+		
+		ServletHelper.redirect(request, response, "products");
+
 	}
 
 }

@@ -37,7 +37,7 @@
 
 		<div class="d-flex justify-content-between mb-3">
 			<input type="text" id="searchBox" class="form-control w-50"
-				placeholder="Search products..."> <a href="addProduct.jsp"
+				placeholder="Search products..."> <a href="products?action=add"
 				class="btn btn-primary">Add Product</a>
 		</div>
 
@@ -67,12 +67,12 @@
                             <img src="${pageContext.request.contextPath}${product.imagePath}" 
                                  alt="${product.name}" 
                                  style="width: 50px;" 
-                                 onerror="this.src='${pageContext.request.contextPath}/images/default.jpg';">
-						<td><a href="products?action=addCart?code=${product.code}"
+                                 onerror="this.src='${pageContext.request.contextPath}/images/cf_1.jpg';">
+						<td><a href="products?action=addCart&code=${product.code}"
 							class="btn btn-sm btn-success">Add</a></td>
-						<td><a href="products?action=update?code=${product.code}"
+						<td><a href="products?action=update&code=${product.code}"
 							class="btn btn-sm btn-warning">Edit</a></td>
-						<td><a href="products?action=delete?code=${product.code}"
+						<td><a href="products?action=delete&code=${product.code}"
 							class="btn btn-sm btn-danger">Delete</a></td>
 					</tr>
 				</c:forEach>
