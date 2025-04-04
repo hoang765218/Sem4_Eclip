@@ -4,10 +4,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceUnit;
+
 public class DbConnector {
 	static String jdbcURL = "jdbc:mysql://localhost:3306/sem4_shop?useSSL=false";
 	static String jdbcUsername = "hoang";
 	static String jdbcPassword = "12345678";
+	
+	@PersistenceUnit
+	private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("ShopManagement"); 
+	
+	public static EntityManager getEntityManager() {
+		
+		return entityManagerFactory.createEntityManager();
+	}
+	
 	
 	public static Connection getConnection() {
 		Connection connection = null; ;
