@@ -64,10 +64,10 @@
 						<td>${product.name}</td>
 						<td>${product.price}</td>
 						<td>                
-                            <img src="${pageContext.request.contextPath}${product.imagePath}" 
+                            <img src="${pageContext.request.contextPath}/${product.imagePath}" 
                                  alt="${product.name}" 
                                  style="width: 50px;" 
-                                 onerror="this.src='${pageContext.request.contextPath}/images/cf_1.jpg';">
+                                 >
 						<td><a href="products?action=addCart&code=${product.code}"
 							class="btn btn-sm btn-success">Add</a></td>
 						<td><a href="products?action=update&code=${product.code}"

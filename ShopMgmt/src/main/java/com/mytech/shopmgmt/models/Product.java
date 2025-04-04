@@ -23,6 +23,7 @@ public class Product {
 	
 	private double price;
 	private String imagePath;
+	
 
 	public Product() {
 		super();

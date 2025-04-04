@@ -20,12 +20,12 @@
 				All Products</a>
 		</h2>
 		<br>
-		<form action="products?action=update" method="post" >
+		<form action="products?action=update" method="post" enctype="multipart/form-data" >
 			Code <input type="text" name="code"  value="${product.code}" readonly="true"><br> <br> Name:
 			<input type="text" name="name" value="${product.name}"><br> <br> 
 			Price: <input
 				type="number" name="price" value="${product.price}"><br> <br> 
-			Choose a Image: <input type="file" name="image"><br> <br> <input
+			Choose a Image: <input type="file" name="image" accept="image/* "><br> <br> <input
 				type="submit" value="Submit">
 		</form>
 	</div>

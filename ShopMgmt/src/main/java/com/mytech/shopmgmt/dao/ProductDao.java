@@ -35,6 +35,23 @@ public class ProductDao {
 		trans.commit();
 		return true;
 	}
+	public void addProduct1(Product newProduct) {
+		EntityManager entityManager = DbConnector.getEntityManager();
+
+		try {
+			entityManager.getTransaction().begin();
+
+			// Thêm sản phẩm mới vào cơ sở dữ liệu
+			entityManager.persist(newProduct);
+
+			entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			entityManager.close();
+		}
+	}
 	public boolean updateProduct(Product product) {
 		EntityManager entityManager = DbConnector.getEntityManager();
 		var trans = entityManager.getTransaction();

@@ -20,13 +20,27 @@
 				All Products</a>
 		</h2>
 		<br>
-		<form action="products" method="post" >
-			Code <input type="text" name="code"><br> <br> Name:
-			<input type="text" name="name"><br> <br> 
-			Price: <input
-				type="number" name="price"><br> <br> 
-			Choose a Image: <input type="file" name="image"><br> <br> <input
-				type="submit" value="Submit">
+
+		<form action="products" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="add_product" />
+			<div class="mb-3">
+				<label>Code:</label> <input type="text" class="form-control"
+					name="code" required>
+			</div>
+			<div class="mb-3">
+				<label>Name:</label> <input type="text" class="form-control"
+					name="name" required>
+			</div>
+			<div class="mb-3">
+				<label>Price:</label> <input type="number" step="0.01"
+					class="form-control" name="price" required>
+			</div>
+			<div class="mb-3">
+				<label>Image URL:</label> <input type="file" class="form-control"
+					name="image" accept="image/*" >
+			</div>
+			<button type="submit" class="btn btn-success">Add Product</button>
+			<a href="products" class="btn btn-secondary">Cancel</a>
 		</form>
 	</div>
 
